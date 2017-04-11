@@ -1,23 +1,44 @@
-# Minimal package/module sample
+# python voc parser
 
-Minimal python module/package sample project. Only defines a class with dummy functionality and some demo tests. Minimal project structure.
+An easy way to read pasal voc dataset. For now it only has functionality for the detection competition.
 
-## TODO
+## Installation
 
-* generate documentation using Sphinx
-* create account at pypi.python.org and add .pypirc file
-* git tag and release on github
-* publish the package
+Install from source:
 
-## Project structure
+git clone https://github.com/gabrielrezzonico/python_voc_parser.git
+cd python_voc_parser
+pip install .
 
-| File or folder  | Description  |
-|---|---|
-| setup.py  | Module configuration.  |
-| setup.cfg  | PyPi configuration.  |
-| README.md  | this file.  |
-| python_package/  | The actual package/module. Where all the code resides.  |
-| tests/  | Sample unit test using py.test.  |
+## Example usage
+
+Extract the dataset, in this example the dataset was extrated in a folder called "VOCdevkit":
+
+```python
+WORKING_DIRECTORY = os.getcwd()
+# we are going to use all the train and validation images from all categories (trainval.txt)
+IMAGE_SET_PATH = os.path.join(WORKING_DIRECTORY, 'VOCdevkit/VOC2012/ImageSets', 'Main')
+DETECTION_COMPETITION_FILENAME = 'trainval.txt'
+ALL_IMG_DETECTION_COMPETITION_FILEPATH = os.path.join(IMAGE_SET_PATH, DETECTION_COMPETITION_FILENAME)
+# path to the voc annotation folder
+ANNOTATIONS_PATH = os.path.join(WORKING_DIRECTORY, 'VOCdevkit/VOC2012/Annotations')
+```
+
+```python
+#import the module
+import python_voc_parser as voc 
+#create a parser object
+parser = voc.VocAnnotationParser()
+```
+
+```python
+#parse the voc data
+parser.parse_from_voc(ALL_IMG_DETECTION_COMPETITION_FILEPATH, ANNOTATIONS_PATH)
+# if you need a list with all the data:
+annon_list = parser.annotation_line_list
+# if you need a dataframe:
+annon_df = parser.get_annotation_dataframe()
+```
 
 
 ## Development
@@ -46,21 +67,6 @@ While you are developing the module you can install your module from source:
 
 ```bash
 pip install -e .
-python3 
-```
-
-And you can import the module and testing in python.
-
-```bash
-$ ▶ python3
-Python 3.5.3 |Continuum Analytics, Inc.| (default, Mar  6 2017, 11:58:13)
-[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import python_package
->>> type(ob)
-<class 'python_package.example.Example'>
->>> ob.hello()
-'Hello!!'
 ```
 
 ## Test and coverage
@@ -96,18 +102,3 @@ TOTAL                            6      0   100%
 
 ============================ 3 passed, 1 skipped in 0.05 seconds =============================
 ```
-
-## Generate documention
-
-To generate documentation:
-
-```bash
-cd docs
-make html
-```
-
-The index.html is generated based on docs/index.rst. A simple file of how to autogenerate documentation from the docstring on your code can be found in docs/code.rst, this use autocode. for more infomation you can read:
-
-* [Sphinx](http://www.sphinx-doc.org/en/stable/tutorial.html) 
-
-* [Autodoc](http://www.sphinx-doc.org/en/stable/ext/autodoc.html)
