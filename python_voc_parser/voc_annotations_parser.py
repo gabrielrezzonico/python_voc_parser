@@ -3,7 +3,7 @@ from xml.etree import ElementTree
 import pandas as pd
 import os
 
-class VocAnnotationParser(object):
+class VocAnnotationsParser(object):
     """ Visual Object Classes Challenge 2012 Annotation Data parsing functionality.
 
         This class is intended to be used for the "Detenction competition", please refer to:\

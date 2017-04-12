@@ -14,6 +14,7 @@ setup(name='python_voc_parser',
           'Topic :: Software Development :: Libraries'
       ],
       url='https://github.com/gabrielrezzonico/python_voc_parser',
+      download_url = 'https://github.com/gabrielrezzonico/python_voc_parser/tarball/0.1',
       author='Gabriel Rezzonico',
       author_email='gabrielrezzonico@gmail.com',
       license='MIT',

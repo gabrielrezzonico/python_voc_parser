@@ -35,7 +35,7 @@ ANNOTATIONS_PATH = os.path.join(WORKING_DIRECTORY, 'VOCdevkit/VOC2012/Annotation
 #import the module
 import python_voc_parser as voc 
 #create a parser object
-parser = voc.VocAnnotationParser()
+parser = voc.VocAnnotationsParser()
 ```
 
 ```python
