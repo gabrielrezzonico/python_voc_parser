@@ -115,7 +115,7 @@ class VocAnnotationsParser(object):
                 # now that we have all the information from an annotation bbox
                 # create a dict to be inserted in the final result
                 row_dictionary.update({'filename': filename,
-                                       'full_path': img_full_path,
+                                       'img_full_path': img_full_path,
                                        'width': width,
                                        'height': height,
                                        'class_name': class_name,
