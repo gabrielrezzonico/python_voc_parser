@@ -36,6 +36,21 @@ class VocAnnotationsParser(object):
         return self._annotation_line_list
 
     def get_annotation_dataframe(self):
+        """
+        Returns a dataframe with the parsed pascal voc data. When an image has several bbox annotations, the resulting dataframe\
+        has a line for each.
+
+        Example:
+
+        voc_parser.get_annotation_dataframe()
+
+|   | class_name  | height  | img  | img_full_path  | width  | xmax  | xmin  | ymax  | ymin  |
+|---|---|---|---|---|---|---|---|---|---|
+| 0  | tvmonitor  | 375.0  | 2008_000002  | /home/user/Personal/playground/voc/VOCdevkit/V...  | 500.0  | 448   | 34 | 293  | 11  |
+| 1  | train  | 333.0  | 2008_000003  | /home/user/Personal/playground/voc/VOCdevkit/V...  | 500.0  | 500  | 46  | 333  | 11  |
+| 2  | person  | 333.0  | 2008_000003  | /home/user/Personal/playground/voc/VOCdevkit/V...  | 500.0  | 83  | 62  | 243  | 190  |
+
+        """
         return pd.DataFrame(self.annotation_line_list)
 
     def _parse_from_voc(self):
