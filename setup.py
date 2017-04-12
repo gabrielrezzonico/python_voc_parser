@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(name='python_voc_parser',
       version='0.1',
@@ -13,7 +13,7 @@ setup(name='python_voc_parser',
       author='Gabriel Rezzonico',
       author_email='gabrielrezzonico@gmail.com',
       license='MIT',
-      packages=['python_voc_parser'],
+      packages=find_packages(exclude=['contrib', 'docs', 'tests']),
       # $ pip install -e .[dev,test]
       extras_require={
           'dev': ['sphinx'],
