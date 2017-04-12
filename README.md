@@ -44,8 +44,27 @@ parser = voc.VocAnnotationsParser(IMAGE_PATH, IMAGE_SET_PATH, ANNOTATIONS_PATH)
 # if you need a list with all the data:
 annon_list = parser.annotation_line_list
 # if you need a dataframe:
-annon_df = parser.get_annotation_dataframe()
+parser.get_annotation_dataframe()
 ```
+
+returns:
+
+|   | class_name  | height  | img  | img_full_path  | width  | xmax  | xmin  | ymax  | ymin  |
+|---|---|---|---|---|---|---|---|---|---|
+| 0  | tvmonitor  | 375.0  | 2008_000002  | /home/user/Personal/playground/voc/VOCdevkit/V...  | 500.0  | 448   | 34 | 293  | 11  |
+| 1  | train  | 333.0  | 2008_000003  | /home/user/Personal/playground/voc/VOCdevkit/V...  | 500.0  | 500  | 46  | 333  | 11  |
+| 2  | person  | 333.0  | 2008_000003  | /home/user/Personal/playground/voc/VOCdevkit/V...  | 500.0  | 83  | 62  | 243  | 190  |
+
+```python
+parser.get_annotation_dataframe_compact()
+```
+
+returns:
+
+|   | img_full_path  | annon  |
+|---|---|---|
+| 0  | /home/user/Personal/playground/voc/VOCdevkit/V...2008_000002.jpg  | (((34, 11, 448, 293), tvmonitor),)  |
+| 1  | /home/user/Personal/playground/voc/VOCdevkit/V...2008_000003.jpg  | (((46, 11, 500, 333), train), ((62, 190, 83, 2...  |
 
 
 ## Contribute (Development of the package)

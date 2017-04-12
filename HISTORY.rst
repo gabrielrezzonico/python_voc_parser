@@ -1,5 +1,6 @@
 Version 1.0.0
 -------------
+7e4bfd7 fix: fix an error with get_dataframe_compact
 e578f65 feat: add function that return dataframe only with img and a tuple of all the bbox annotation for each image
 cf1294f fix: fix wrong valur in img_full_path
 
