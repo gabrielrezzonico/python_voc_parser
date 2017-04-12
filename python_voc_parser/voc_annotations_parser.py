@@ -21,8 +21,15 @@ class VocAnnotationsParser(object):
 
     """
 
-    def __init__(self):
+    def __init__(self, voc_image_path='VOCdevkit/VOC2012/JPEGImages',
+                 voc_image_set_path='VOCdevkit/VOC2012/ImageSets/Main/trainval.txt',
+                 voc_annon_path='VOCdevkit/VOC2012/Annotations'):
+        self.current_work_dir = os.getcwd()
+        self.voc_image_path = os.path.join(self.current_work_dir, voc_image_path)
+        self.voc_image_set_path = os.path.join(self.current_work_dir, voc_image_set_path)
+        self.voc_annon_path = os.path.join(self.current_work_dir, voc_annon_path)
         self._annotation_line_list = [] # a list of annotations, each annontation is dict
+        self._parse_from_voc() # parse all the data
 
     @property
     def annotation_line_list(self):
@@ -31,15 +38,14 @@ class VocAnnotationsParser(object):
     def get_annotation_dataframe(self):
         return pd.DataFrame(self.annotation_line_list)
 
-    def parse_from_voc(self, voc_imageset_text_path,\
-                                     voc_annotations_path):
+    def _parse_from_voc(self):
         # get all the files names from the voc_imageset_text_path
-        filenames_list = helpers.get_file_lines(voc_imageset_text_path)
+        filenames_list = helpers.get_file_lines(self.voc_image_set_path)
 
         #for each filename from the image set we need to get the annotations
         for filename in filenames_list:
             # get the path of the annotation file
-            annotation_file = self._get_img_detection_filepath(voc_annotations_path, filename)
+            annotation_file = self._get_img_detection_filepath(self.voc_annon_path, filename)
             # tree of the xml
             tree = ElementTree.parse(annotation_file)
             # get the root element
@@ -52,14 +58,16 @@ class VocAnnotationsParser(object):
 
             #for each object tree
             for object_annotation in object_tree_list:
-                # create a dictionary with all the information {img,img_full_path,width,height,class_name,xmin,ymin,xmax,ymax}
-                row_dictionary = {} 
+                # create a dictionary with all the information
+                # {img,img_full_path,width,height,class_name,xmin,ymin,xmax,ymax}
+                row_dictionary = {}
 
                 class_name = self._get_annotation_classname(object_annotation)
                 obj_bbox = object_annotation.find('bndbox')
                 xmin, ymin, xmax, ymax = self._get_annotation_bbox(obj_bbox)
 
-                #now that we have all the information from an annotation bbox create a dict to be inserted in the final result
+                # now that we have all the information from an annotation bbox
+                # create a dict to be inserted in the final result
                 row_dictionary.update({'filename': filename,
                                        'full_path': annotation_file,
                                        'width': width,
@@ -79,10 +87,10 @@ class VocAnnotationsParser(object):
         width = float(size_tree.find('width').text)
         height = float(size_tree.find('height').text)
         return (width, height)
-    
+
     def _get_annotation_classname(self, object_annotation):
         return object_annotation.find('name').text
-    
+
     def _get_annotation_bbox(self, bbox_node):
         xmin = int(round(float(bbox_node.find('xmin').text)))
         ymin = int(round(float(bbox_node.find('ymin').text)))

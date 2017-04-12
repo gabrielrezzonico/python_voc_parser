@@ -29,18 +29,18 @@ DETECTION_COMPETITION_FILENAME = 'trainval.txt'
 ALL_IMG_DETECTION_COMPETITION_FILEPATH = os.path.join(IMAGE_SET_PATH, DETECTION_COMPETITION_FILENAME)
 # path to the voc annotation folder
 ANNOTATIONS_PATH = os.path.join(WORKING_DIRECTORY, 'VOCdevkit/VOC2012/Annotations')
+# Image path
+IMAGE_PATH = os.path.join(WORKING_DIRECTORY, 'VOCdevkit/VOC2012/JPEGImages')
 ```
 
 ```python
 #import the module
 import python_voc_parser as voc 
 #create a parser object
-parser = voc.VocAnnotationsParser()
+parser = voc.VocAnnotationsParser(IMAGE_PATH, IMAGE_SET_PATH, ANNOTATIONS_PATH)
 ```
 
 ```python
-#parse the voc data
-parser.parse_from_voc(ALL_IMG_DETECTION_COMPETITION_FILEPATH, ANNOTATIONS_PATH)
 # if you need a list with all the data:
 annon_list = parser.annotation_line_list
 # if you need a dataframe:
