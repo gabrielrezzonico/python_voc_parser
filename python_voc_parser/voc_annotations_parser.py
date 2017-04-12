@@ -53,6 +53,34 @@ class VocAnnotationsParser(object):
         """
         return pd.DataFrame(self.annotation_line_list)
 
+    def get_annotation_dataframe_compact(self):
+        """
+        Returns a dataframe only two columns, img_full_path and annon. The annon column contain all the bbox and class for\
+        each image. It has the following for each image:
+
+        (((xmin1, ymin1, xmax1, ymax1), class_name1), ((xmin2, ymin2, xmax2, ymax2), class_name2) )
+
+        Example:
+
+        voc_parser.get_annotation_dataframe_compact()
+
+|   | img_full_path  | annon  |
+|---|---|---|
+| 0  | /home/user/Personal/playground/voc/VOCdevkit/V...  | (((34, 11, 448, 293), tvmonitor),)  |
+| 1  | /home/user/Personal/playground/voc/VOCdevkit/V...  | (((46, 11, 500, 333), train), ((62, 190, 83, 2...  |
+
+
+        """        
+        temp_df = pd.DataFrame(self.annotation_line_list)
+        # make a list with the annotations for each bbox (each row of the fata frame)
+        temp_df['annon'] = list(zip(list(zip(temp_df['xmin'], temp_df['ymin'], temp_df['xmax'], temp_df['ymax'])), temp_df['class_name']))
+        # group the df based on im_full_path
+        grouped = temp_df.groupby(['img_full_path'])
+        # create tuples of the grouped rows columns
+        df_serie = grouped['annon'].aggregate(lambda x: tuple(x))
+        return df_serie.to_frame()
+
+
     def _parse_from_voc(self):
         # get all the files names from the voc_imageset_text_path
         filenames_list = helpers.get_file_lines(self.voc_image_set_path)
