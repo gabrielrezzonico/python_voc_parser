@@ -50,6 +50,9 @@ class VocAnnotationsParser(object):
             tree = ElementTree.parse(annotation_file)
             # get the root element
             root_node = tree.getroot()
+            # get file name
+            img_filename = root_node.find('filename').text
+            img_full_path = self._get_img_filepath(img_filename)
             # get the size of the image from the annotation xml file
             width, height = self._get_img_size(root_node)
 
@@ -69,7 +72,7 @@ class VocAnnotationsParser(object):
                 # now that we have all the information from an annotation bbox
                 # create a dict to be inserted in the final result
                 row_dictionary.update({'filename': filename,
-                                       'full_path': annotation_file,
+                                       'full_path': img_full_path,
                                        'width': width,
                                        'height': height,
                                        'class_name': class_name,
@@ -82,6 +85,9 @@ class VocAnnotationsParser(object):
     def _get_img_detection_filepath(self, voc_annotations_path, img_name):
         return os.path.join(voc_annotations_path, img_name + '.xml')
 
+    def _get_img_filepath(self, image):
+        return os.path.join(self.voc_image_path, image)
+        
     def _get_img_size(self, root_node):
         size_tree = root_node.find('size')
         width = float(size_tree.find('width').text)
