@@ -7,7 +7,11 @@ setup(name='python_voc_parser',
       classifiers=[
           'Development Status :: 3 - Alpha',
           'License :: OSI Approved :: MIT License',
-          'Programming Language :: Python :: 3.5'
+          'Programming Language :: Python :: 3.5',
+          'Intended Audience :: Developers',
+          'Intended Audience :: Science/Research',
+          'Topic :: Utilities',
+          'Topic :: Software Development :: Libraries'
       ],
       url='https://github.com/gabrielrezzonico/python_voc_parser',
       author='Gabriel Rezzonico',
@@ -19,7 +23,8 @@ setup(name='python_voc_parser',
           'dev': ['sphinx'],
           'test': ['pytest', 'pytest-cov'],
       },
-      install_requires=[],
+      #https://packaging.python.org/requirements/
+      install_requires=['pandas'],
       zip_safe=False)
 
 
