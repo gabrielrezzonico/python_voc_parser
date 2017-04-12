@@ -41,7 +41,7 @@ Extract the dataset, in this example the dataset was extrated in a folder called
     #import the module
     import python_voc_parser as voc 
     #create a parser object
-    parser = voc.VocAnnotationParser()
+    parser = voc.VocAnnotationsParser()
 
 .. code:: python
 
