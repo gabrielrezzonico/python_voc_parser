@@ -1,14 +1,21 @@
 # python voc parser
 
-An easy way to read pasal voc dataset. For now it only has functionality for the detection competition.
+An easy way to read pascal voc dataset. For now it only has functionality for the detection competition.
 
 ## Installation
 
+Install from PyPi
+```bash
+pip install python_voc_parser
+```
+
 Install from source:
 
+```bash
 git clone https://github.com/gabrielrezzonico/python_voc_parser.git
 cd python_voc_parser
 pip install .
+```
 
 ## Example usage
 
@@ -41,7 +48,7 @@ annon_df = parser.get_annotation_dataframe()
 ```
 
 
-## Development
+## Contribute (Development of the package)
 
 To develop a module based on this project follow this instructions.
 
@@ -101,4 +108,10 @@ python_package/example.py        5      0   100%
 TOTAL                            6      0   100%
 
 ============================ 3 passed, 1 skipped in 0.05 seconds =============================
+```
+
+## Convert README.md to README.rst
+
+```bash
+pandoc --columns=100 --output=README.rst --to rst README.md
 ```
