@@ -1,10 +1,10 @@
-Welcome to python_voc_parser's code docs!
-==========================================
+python_voc_parser's code!
+=========================
 
 .. automodule:: python_voc_parser
     :members:
     :show-inheritance:
 
-.. autoclass:: Example
+.. autoclass:: VocAnnotationsParser
     :members:
     :show-inheritance:
