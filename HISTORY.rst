@@ -1,3 +1,8 @@
+Version 1.0.0
+-------------
+e578f65 feat: add function that return dataframe only with img and a tuple of all the bbox annotation for each image
+cf1294f fix: fix wrong valur in img_full_path
+
 Verion 0.1
 ----------
 0bcc1d0 fix: fix the name of the class

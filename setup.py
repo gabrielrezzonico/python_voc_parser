@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='python_voc_parser',
-      version='0.1',
+      version='1.0.0',
       description='Python pascal voc dataset parset',
       # see: https://pypi.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
@@ -14,7 +14,7 @@ setup(name='python_voc_parser',
           'Topic :: Software Development :: Libraries'
       ],
       url='https://github.com/gabrielrezzonico/python_voc_parser',
-      download_url = 'https://github.com/gabrielrezzonico/python_voc_parser/tarball/0.1',
+      download_url = 'https://github.com/gabrielrezzonico/python_voc_parser/tarball/1.0.0',
       author='Gabriel Rezzonico',
       author_email='gabrielrezzonico@gmail.com',
       license='MIT',
